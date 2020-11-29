@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao">
+    <!-- 用户登录，查询数据库 -->
+    <select id="LoginUser" parameterType="pojo.User" resultType="pojo.User">
+        select * from user where userId = #{loginUser.userId};
+    </select>
+
+    <!-- 用户注册，数据库添加功能 -->
+    <insert id="registerUser" parameterType="pojo.User">
+        insert into user(userId,password) value(#{register.userId,jdbcType=VARCHAR},#{register.password,jdbcType=VARCHAR});
+    </insert>
+
+    <!-- 用户修改密码，数据库修改功能 -->
+    <update id="UpdatePassword" parameterType="java.lang.String">
+        update user set password=${NewPassword} where userId=${UpdateUser}
+    </update>
+
+    <!-- 修改用户的个人信息，数据库修改功能 -->
+    <!--<update id="">
+
+    </update>-->
+
+    <!-- 删除用户功能，数据库删除功能 -->
+    <delete id="deleteUser" parameterType="pojo.User">
+        delete from user where userId=#{deleteUser.userId}
+    </delete>
+
+</mapper>
